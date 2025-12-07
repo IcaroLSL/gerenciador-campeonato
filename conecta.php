@@ -1,14 +1,10 @@
-<?php 
-    $comp = "localhost";
-    $user = "root";
-    $senha = "";
-    $db = "db_campeonato";
-
-    $conn = new mysqli($comp, $user, $senha, $db);
-
-    if ($conn->connect_error){
-        die("Falha na conexão: " . $conn->connect_error);
+<?php
+    $servername = "localhost";
+    $username = "minicurso";
+    $password = "123";
+    $dbname = "db_campeonato";
+    $connection = mysqli_connect($servername, $username, $password, $dbname);
+    if ($connection->connect_error) {
+        die("Connection failed: " . $connection->connect_error);
     }
-
-    $conn->set_charset("utf8");
 ?>
