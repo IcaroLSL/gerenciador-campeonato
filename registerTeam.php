@@ -1,0 +1,171 @@
+<?php
+    require_once("conecta.php");
+    require_once("function.php");
+    if (isset($_COOKIE['credentials'])) {
+        if ($_COOKIE['credentials'] != false) {
+            $credentials = json_decode($_COOKIE['credentials'], true);
+            if (isset($credentials['id']) && isset($credentials['cargo']) && isset($credentials['name']) && isset($credentials['username'])) {
+                if ($credentials['cargo'] != 2) {
+                    header("Location: MenuPrincipal.php");
+                }
+            } else {
+                header("Location: MenuPrincipal.php");
+            }
+        } else {
+            header("Location: MenuPrincipal.php");
+        }
+    }
+?>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Usuários</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <!-- Barra de navegação -->
+    <nav class="flex flex-row justify-between items-center p-4 bg-gray-200 shadow-md mb-8">
+        <div class="flex items-center gap-4">
+            <a href="MenuPrincipal.php" class="text-xl font-bold text-gray-800 hover:text-blue-500 transition">
+                <i class="fas fa-trophy"></i> Fatec Campeonatos
+            </a>
+            <span class="text-gray-400">|</span>
+            <span class="text-gray-600">
+                <i class="fas fa-user-plus"></i> Registro de Times
+            </span>
+        </div>
+
+        <div class="flex flex-row items-center space-x-4">
+            <?php if (isset($credentials)): ?>
+                <h3 class="text-gray-700">
+                    <i class="fas fa-user-shield"></i> <?php echo htmlspecialchars($credentials['name'], ENT_QUOTES, 'UTF-8'); ?> (Administrador)
+                </h3>
+            <?php endif; ?>
+            <a href="MenuPrincipal.php" class="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600 transition">
+                <i class="fas fa-arrow-left"></i> Voltar
+            </a>
+        </div>
+    </nav>
+    
+    <div class="max-w-2xl mx-auto px-4">
+        <!-- Card principal -->
+        <div class="bg-white rounded-lg shadow-lg p-8">
+            <!-- Cabeçalho -->
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-gray-800 flex items-center gap-2">
+                    <i class="fas fa-user-plus text-blue-500"></i> Registro de Times
+                </h1>
+                <p class="text-gray-600 mt-2">Preencha os dados para criar um novo Time no sistema</p>
+            </div>
+            
+            <form action="" method="post" class="space-y-6">
+                <!-- Nome -->
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
+                        <i class="fas fa-id-card"></i> Nome do Time
+                    </label>
+                    <input 
+                        type="text" 
+                        id="name" 
+                        name="name" 
+                        required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        placeholder="Digite o nome do time"
+                    >
+                </div>
+                
+                <!-- Cidade -->
+                <div>
+                    <label for="cidade" class="block text-sm font-medium text-gray-700 mb-2">
+                        <i class="fas fa-lock"></i> Cidade
+                    </label>
+                    <input 
+                        type="text" 
+                        id="cidade" 
+                        name="cidade" 
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        placeholder="Digite a cidade do time"
+                    >
+                </div>
+                
+                <!-- Campeonato -->
+                <div>
+                    <label for="campeonato" class="block text-sm font-medium text-gray-700 mb-2">
+                        <i class="fas fa-briefcase"></i> Campeonato
+                    </label>
+                    <select 
+                        name="campeonato" 
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    >
+                        <option value="">Selecione o campeonato desse time...</option>
+                        <?php
+                            $query = "SELECT id_campeonato, titulo FROM tbl_campeonatos ORDER BY titulo ASC";
+                            $stmtCampeonato = mysqli_stmt_init($connection);
+                            if (!(mysqli_stmt_prepare($stmtCampeonato, $query))) {
+                                echo "Erro na preparação da declaração: " . mysqli_stmt_error($stmtCampeonato);
+                            }
+                            mysqli_stmt_execute($stmtCampeonato);
+                            $result = mysqli_stmt_get_result($stmtCampeonato);
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo '<option value="' . htmlspecialchars($row['id_campeonato'], ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($row['titulo'], ENT_QUOTES, 'UTF-8') . '</option>';
+                            }
+                            mysqli_stmt_close($stmtCampeonato);
+                        ?>
+                    </select>
+                </div>
+                
+                <!-- Botão -->
+                <div>
+                    <button 
+                        type="submit" 
+                        name="register"
+                        class="w-full bg-blue-500 text-white py-3 px-4 rounded-lg font-semibold hover:bg-blue-600 transition duration-200 flex items-center justify-center gap-2"
+                    >
+                        <i class="fas fa-check"></i> Registrar Usuário
+                    </button>
+                </div>
+            </form>
+            
+            <!-- Mensagens de sucesso/erro -->
+            <div class="mt-6">
+                <?php
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                if (isset($_POST['register'])) {
+                    $name     = clearDataReceived($_POST['name']);
+                    $cidade   = clearDataReceived($_POST['cidade']);
+                    $campeonato = clearDataReceived($_POST['campeonato']);
+
+                    $query = "INSERT INTO tbl_times (nome, cidade, id_campeonato) VALUES (?, ?, ?)";
+                    $stmt = mysqli_stmt_init($connection);
+                    if (!(mysqli_stmt_prepare($stmt, $query))) {
+                        echo "Erro na preparação da declaração: " . mysqli_stmt_error($stmt);
+                    }
+                    mysqli_stmt_bind_param($stmt, "ssi", $name, $cidade, $campeonato);
+                    if (mysqli_stmt_execute($stmt)) {
+                        echo "<div class='p-4 bg-green-100 border border-green-300 text-green-700 rounded flex items-center gap-2'>";
+                        echo "<i class='fas fa-check-circle'></i>";
+                        echo "<span><strong>Sucesso!</strong> Time registrado com sucesso!</span>";
+                        echo "</div>";
+                    } else {
+                        echo "<div class='p-4 bg-red-100 border border-red-300 text-red-700 rounded flex items-center gap-2'>";
+                        echo "<i class='fas fa-exclamation-circle'></i>";
+                        echo "<span><strong>Erro!</strong> " . mysqli_stmt_error($stmt) . "</span>";
+                        echo "</div>";
+                    }
+                    mysqli_stmt_close($stmt);
+                }
+            }
+        ?>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="text-center mt-4 text-sm text-gray-600">
+            <p>&copy; 2025 Gerenciador de Campeonato. Todos os direitos reservados.</p>
+        </div>
+    </div>
+</body>
+</html>
