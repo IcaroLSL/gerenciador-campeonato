@@ -49,7 +49,17 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+<body class="bg-gray-100 min-h-screen">
+    <!-- Barra de navegação simples -->
+    <nav class="p-4 bg-gray-200 shadow-md">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-xl font-bold text-gray-800">
+                <i class="fas fa-trophy"></i> Fatec Campeonatos
+            </div>
+        </div>
+    </nav>
+    
+    <div class="flex items-center justify-center py-12 px-4">
     <div class="w-full max-w-md">
         <!-- Card principal -->
         <div class="bg-white rounded-lg shadow-lg p-8">
@@ -116,6 +126,7 @@
         <div class="text-center mt-4 text-sm text-gray-600">
             <p>&copy; 2025 Gerenciador de Campeonato. Todos os direitos reservados.</p>
         </div>
+    </div>
     </div>
 </body>
 </html>

@@ -25,8 +25,32 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
-<body class="bg-gray-100 min-h-screen py-8">
-    <div class="max-w-2xl mx-auto">
+<body class="bg-gray-100 min-h-screen">
+    <!-- Barra de navegação -->
+    <nav class="flex flex-row justify-between items-center p-4 bg-gray-200 shadow-md mb-8">
+        <div class="flex items-center gap-4">
+            <a href="MenuPrincipal.php" class="text-xl font-bold text-gray-800 hover:text-blue-500 transition">
+                <i class="fas fa-trophy"></i> Fatec Campeonatos
+            </a>
+            <span class="text-gray-400">|</span>
+            <span class="text-gray-600">
+                <i class="fas fa-user-plus"></i> Registro de Usuários
+            </span>
+        </div>
+
+        <div class="flex flex-row items-center space-x-4">
+            <?php if (isset($credentials)): ?>
+                <h3 class="text-gray-700">
+                    <i class="fas fa-user-shield"></i> <?php echo htmlspecialchars($credentials['name'], ENT_QUOTES, 'UTF-8'); ?> (Administrador)
+                </h3>
+            <?php endif; ?>
+            <a href="MenuPrincipal.php" class="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600 transition">
+                <i class="fas fa-arrow-left"></i> Voltar
+            </a>
+        </div>
+    </nav>
+    
+    <div class="max-w-2xl mx-auto px-4">
         <!-- Card principal -->
         <div class="bg-white rounded-lg shadow-lg p-8">
             <!-- Cabeçalho -->
@@ -114,21 +138,15 @@
                     >
                 </div>
                 
-                <!-- Botões -->
-                <div class="flex gap-4">
+                <!-- Botão -->
+                <div>
                     <button 
                         type="submit" 
                         name="register"
-                        class="flex-1 bg-blue-500 text-white py-3 px-4 rounded-lg font-semibold hover:bg-blue-600 transition duration-200 flex items-center justify-center gap-2"
+                        class="w-full bg-blue-500 text-white py-3 px-4 rounded-lg font-semibold hover:bg-blue-600 transition duration-200 flex items-center justify-center gap-2"
                     >
                         <i class="fas fa-check"></i> Registrar Usuário
                     </button>
-                    <a 
-                        href="MenuPrincipal.php"
-                        class="flex-1 bg-gray-500 text-white py-3 px-4 rounded-lg font-semibold hover:bg-gray-600 transition duration-200 flex items-center justify-center gap-2 text-center"
-                    >
-                        <i class="fas fa-arrow-left"></i> Voltar
-                    </a>
                 </div>
             </form>
             

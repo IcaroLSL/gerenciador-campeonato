@@ -3,10 +3,18 @@
     require_once("conecta.php");
     if (!isset($_COOKIE['credentials']) || $_COOKIE['credentials'] == false) {
         header("Location: login.php");
+        exit;
     }
     $cookieData = json_decode($_COOKIE['credentials'], true);
     if ($cookieData['cargo'] != 1) {
         header("Location: MenuPrincipal.php");
+        exit;
+    }
+    
+    // Logout
+    if (isset($_POST['deslogar'])) {
+        setcookie("credentials", false, time() + (86400 * 30), "/");
+        header("Location: login.php");
         exit;
     }
 ?>
@@ -15,11 +23,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Treinador</title>
+    <title>Treinador - Gerenciar Time</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body class="bg-gray-50">
+    <!-- Barra de navegação -->
+    <nav class="flex flex-row justify-between items-center p-4 bg-gray-200 shadow-md">
+        <div class="flex items-center gap-4">
+            <a href="MenuPrincipal.php" class="text-xl font-bold text-gray-800 hover:text-blue-500 transition">
+                <i class="fas fa-trophy"></i> Fatec Campeonatos
+            </a>
+            <span class="text-gray-400">|</span>
+            <span class="text-gray-600">
+                <i class="fas fa-users"></i> Gerenciar Time
+            </span>
+        </div>
+
+        <div class="flex flex-row items-center space-x-4">
+            <h3 class="text-gray-700">
+                <i class="fas fa-user-tie"></i> <?php echo htmlspecialchars($cookieData['name'], ENT_QUOTES, 'UTF-8'); ?> (Treinador)
+            </h3>
+
+            <form action="" method="post">
+                <button class="bg-red-500 text-white py-2 px-4 rounded cursor-pointer hover:bg-red-600 transition" type="submit" name="deslogar">
+                    <i class="fas fa-sign-out-alt"></i> Deslogar
+                </button>
+            </form>
+        </div>
+    </nav>
     <?php
         $userId = isset($cookieData['id']) ? (int)$cookieData['id'] : 0;
 
@@ -46,8 +78,9 @@
         mysqli_stmt_close($stmtTime);
     ?>
     
+    <!-- Conteúdo principal -->
     <div class="p-4">
-        <h1 class="text-2xl font-bold mb-6">Gerenciar Time</h1>
+        <h1 class="text-2xl font-bold mb-6"><i class="fas fa-clipboard-list"></i> Gerenciar Time</h1>
         
         <!-- Layout de duas colunas -->
         <div class="grid grid-cols-2 gap-6">
