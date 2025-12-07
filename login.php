@@ -4,7 +4,6 @@
     
     $mensagem = "";
     
-    // Processa o login ANTES de enviar qualquer HTML
     if (isset($_POST['logar']) && $_SERVER["REQUEST_METHOD"] == "POST") {
         $username = clearDataReceived($_POST['username']);
         $password = hash("sha256", clearDataReceived($_POST['password']));
@@ -36,7 +35,6 @@
         }
     }
     
-    // Verifica cookie de login
     if (isset($_COOKIE['credentials']) && $_COOKIE['credentials'] != false) {
         header("Location: MenuPrincipal.php");
         exit;
