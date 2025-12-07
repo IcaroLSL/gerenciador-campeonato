@@ -49,10 +49,10 @@
                         "username" => $username
                     );
                     setcookie("credentials", json_encode($cookieData), time() + (86400 * 30));
+                    header("Location: MenuPrincipal.php");
                 } else {
                     setcookie("credentials", false, time() + (86400 * 30));
                     echo "<p>Usuário ou senha incorretos. Tente novamente.</p>";
-                    echo "<p>$password</p>";
                 }
                 mysqli_stmt_close($stmt);
             }
