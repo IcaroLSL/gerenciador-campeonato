@@ -123,14 +123,26 @@
                 if (isset($_POST['register'])) {
                     $name     = clearDataReceived($_POST['name']);
                     $data_inicio   = clearDataReceived($_POST['data_inicio']);
-                    $intervalo_minutos = clearDataReceived($_POST['intervalo_minutos']);
+
+                    // converter intervalo (input time HH:MM ou valor numérico) para minutos inteiros
+                    $intervalo_raw = clearDataReceived($_POST['intervalo_minutos']);
+                    $intervalo_minutos = 0;
+                    if (is_string($intervalo_raw) && preg_match('/^(\d{1,2}):(\d{2})(:\d{2})?$/', $intervalo_raw, $m)) {
+                        $hours = (int)$m[1];
+                        $minutes = (int)$m[2];
+                        $intervalo_minutos = $hours * 60 + $minutes;
+                    } else {
+                        // se não for formato de hora, tenta interpretar como número de minutos
+                        $intervalo_minutos = (int)$intervalo_raw;
+                    }
 
                     $query = "INSERT INTO tbl_campeonatos (titulo, data_inicio, intervalo_minutos) VALUES (?, ?, ?)";
                     $stmt = mysqli_stmt_init($connection);
                     if (!(mysqli_stmt_prepare($stmt, $query))) {
                         echo "Erro na preparação da declaração: " . mysqli_stmt_error($stmt);
                     }
-                    mysqli_stmt_bind_param($stmt, "sss", $name, $data_inicio, $intervalo_minutos);
+                    // titulo: string, data_inicio: string, intervalo_minutos: integer
+                    mysqli_stmt_bind_param($stmt, "ssi", $name, $data_inicio, $intervalo_minutos);
                     if (mysqli_stmt_execute($stmt)) {
                         echo "<div class='p-4 bg-green-100 border border-green-300 text-green-700 rounded flex items-center gap-2'>";
                         echo "<i class='fas fa-check-circle'></i>";
