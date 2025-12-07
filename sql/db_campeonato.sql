@@ -145,6 +145,7 @@ CREATE TABLE tbl_usuarios (
     username VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     name VARCHAR(150) NOT NULL,
+    cargo TINYINT(4) NOT NULL DEFAULT 0,
     email VARCHAR(150) UNIQUE
 );
 

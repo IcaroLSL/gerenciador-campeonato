@@ -1,7 +1,7 @@
 <?php
-    $servername = "localhost";
-    $username = "minicurso";
-    $password = "123";
+    $servername = "127.0.0.1";
+    $username = "root";
+    $password = "Canddoce18906";
     $dbname = "db_campeonato";
     $connection = mysqli_connect($servername, $username, $password, $dbname);
     if ($connection->connect_error) {
