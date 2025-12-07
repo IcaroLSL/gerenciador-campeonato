@@ -136,6 +136,21 @@ ALTER TABLE `tbl_jogos`
   ADD CONSTRAINT `tbl_jogos_ibfk_1` FOREIGN KEY (`id_campeonato`) REFERENCES `tbl_campeonatos` (`id_campeonato`) ON DELETE CASCADE,
   ADD CONSTRAINT `tbl_jogos_ibfk_2` FOREIGN KEY (`equipe_casa`) REFERENCES `tbl_equipes` (`id_equipe`) ON DELETE SET NULL,
   ADD CONSTRAINT `tbl_jogos_ibfk_3` FOREIGN KEY (`equipe_fora`) REFERENCES `tbl_equipes` (`id_equipe`) ON DELETE SET NULL;
+--
+-- Tabela e dados de usuários adicionados manualmente
+--
+
+CREATE TABLE tbl_usuarios (
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    name VARCHAR(150) NOT NULL,
+    email VARCHAR(150) UNIQUE
+);
+
+
+INSERT INTO tbl_usuarios (username, password, cargo, name) VALUES ("admin", "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918", 2, "Henri");
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
