@@ -34,7 +34,7 @@
             </a>
             <span class="text-gray-400">|</span>
             <span class="text-gray-600">
-                <i class="fas fa-user-plus"></i> Registro de Times
+                <i class="fas fa-user-plus"></i> Registro de Campeonatos
             </span>
         </div>
 
@@ -56,16 +56,16 @@
             <!-- Cabeçalho -->
             <div class="mb-8">
                 <h1 class="text-3xl font-bold text-gray-800 flex items-center gap-2">
-                    <i class="fas fa-user-plus text-blue-500"></i> Registro de Times
+                    <i class="fas fa-user-plus text-blue-500"></i> Registro de Campeonatos
                 </h1>
-                <p class="text-gray-600 mt-2">Preencha os dados para criar um novo Time no sistema</p>
+                <p class="text-gray-600 mt-2">Preencha os dados para criar um novo Campeonato no sistema</p>
             </div>
             
             <form action="" method="post" class="space-y-6">
                 <!-- Nome -->
                 <div>
                     <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
-                        <i class="fas fa-id-card"></i> Nome do Time
+                        <i class="fas fa-id-card"></i>  Titulo do Campeonato
                     </label>
                     <input 
                         type="text" 
@@ -73,48 +73,35 @@
                         name="name" 
                         required
                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="Digite o nome do time"
+                        placeholder="Digite o título do campeonato"
                     >
                 </div>
                 
-                <!-- Cidade -->
+                <!-- Data Ínicio -->
                 <div>
-                    <label for="cidade" class="block text-sm font-medium text-gray-700 mb-2">
-                        <i class="fas fa-lock"></i> Cidade
+                    <label for="data_inicio" class="block text-sm font-medium text-gray-700 mb-2">
+                        <i class="fas fa-lock"></i> Data Ínicio
                     </label>
                     <input 
-                        type="text" 
-                        id="cidade" 
-                        name="cidade" 
+                        type="date" 
+                        id="data_inicio" 
+                        name="data_inicio" 
                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                        placeholder="Digite a cidade do time"
+                        placeholder="Digite a data de início do campeonato"
                     >
                 </div>
                 
-                <!-- Campeonato -->
+                <!-- Intervalo Em Minutos -->
                 <div>
-                    <label for="campeonato" class="block text-sm font-medium text-gray-700 mb-2">
-                        <i class="fas fa-briefcase"></i> Campeonato
+                    <label for="intervalo_minutos" class="block text-sm font-medium text-gray-700 mb-2">
+                        <i class="fas fa-briefcase"></i> Intervalo Em Minutos
                     </label>
-                    <select 
-                        name="campeonato" 
+                    <input 
+                        type="time" 
+                        id="intervalo_minutos" 
+                        name="intervalo_minutos" 
                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     >
-                        <option value="">Selecione o campeonato desse time...</option>
-                        <?php
-                            $query = "SELECT id_campeonato, titulo FROM tbl_campeonatos ORDER BY titulo ASC";
-                            $stmtCampeonato = mysqli_stmt_init($connection);
-                            if (!(mysqli_stmt_prepare($stmtCampeonato, $query))) {
-                                echo "Erro na preparação da declaração: " . mysqli_stmt_error($stmtCampeonato);
-                            }
-                            mysqli_stmt_execute($stmtCampeonato);
-                            $result = mysqli_stmt_get_result($stmtCampeonato);
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                echo '<option value="' . htmlspecialchars($row['id_campeonato'], ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($row['titulo'], ENT_QUOTES, 'UTF-8') . '</option>';
-                            }
-                            mysqli_stmt_close($stmtCampeonato);
-                        ?>
-                    </select>
                 </div>
                 
                 <!-- Botão -->
@@ -124,7 +111,7 @@
                         name="register"
                         class="w-full bg-blue-500 text-white py-3 px-4 rounded-lg font-semibold hover:bg-blue-600 transition duration-200 flex items-center justify-center gap-2"
                     >
-                        <i class="fas fa-check"></i> Registrar Usuário
+                        <i class="fas fa-check"></i> Registrar Campeonato
                     </button>
                 </div>
             </form>
@@ -135,19 +122,19 @@
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if (isset($_POST['register'])) {
                     $name     = clearDataReceived($_POST['name']);
-                    $cidade   = clearDataReceived($_POST['cidade']);
-                    $campeonato = clearDataReceived($_POST['campeonato']);
+                    $data_inicio   = clearDataReceived($_POST['data_inicio']);
+                    $intervalo_minutos = clearDataReceived($_POST['intervalo_minutos']);
 
-                    $query = "INSERT INTO tbl_times (nome, cidade, id_campeonato) VALUES (?, ?, ?)";
+                    $query = "INSERT INTO tbl_campeonatos (titulo, data_inicio, intervalo_minutos) VALUES (?, ?, ?)";
                     $stmt = mysqli_stmt_init($connection);
                     if (!(mysqli_stmt_prepare($stmt, $query))) {
                         echo "Erro na preparação da declaração: " . mysqli_stmt_error($stmt);
                     }
-                    mysqli_stmt_bind_param($stmt, "ssi", $name, $cidade, $campeonato);
+                    mysqli_stmt_bind_param($stmt, "sss", $name, $data_inicio, $intervalo_minutos);
                     if (mysqli_stmt_execute($stmt)) {
                         echo "<div class='p-4 bg-green-100 border border-green-300 text-green-700 rounded flex items-center gap-2'>";
                         echo "<i class='fas fa-check-circle'></i>";
-                        echo "<span><strong>Sucesso!</strong> Time registrado com sucesso!</span>";
+                        echo "<span><strong>Sucesso!</strong> Campeonato registrado com sucesso!</span>";
                         echo "</div>";
                     } else {
                         echo "<div class='p-4 bg-red-100 border border-red-300 text-red-700 rounded flex items-center gap-2'>";
