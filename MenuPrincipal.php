@@ -58,8 +58,29 @@ switch ($cookieData['cargo']) {
         </div>
 
     </nav>
-    <div class="p-4 space-y-4">
-        <h1 class="text-2xl font-bold">Menu Principal de <?php echo $userType; ?></h1>
+
+    <div class="flex">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white border-r p-4">
+            <h3 class="text-lg font-semibold mb-4">Navegação</h3>
+            <nav class="space-y-2">
+                <?php if ($userType === 'Administrador'): ?>
+                    <a href="registerChampionship.php" class="block text-gray-700 hover:text-blue-600">📌 Cadastrar campeonato</a>
+                    <a href="register.php" class="block text-gray-700 hover:text-blue-600">👥 Cadastrar usuários</a>
+                    <a href="registerTeam.php" class="block text-gray-700 hover:text-blue-600">🏷️ Cadastrar time</a>
+                    <a href="associateTeamChampionship.php" class="block text-gray-700 hover:text-blue-600">🔗 Associar time/campeonato</a>
+                    <a href="associateTrainerTeam.php" class="block text-gray-700 hover:text-blue-600">🧑‍🏫 Associar treinador/time</a>
+                <?php elseif ($userType === 'Treinador'): ?>
+                    <a href="trainner.php" class="block text-gray-700 hover:text-blue-600">➕ Contratar jogador</a>
+                    <a href="CadastroJogador.php" class="block text-gray-700 hover:text-blue-600">🏆 Ver campeonatos</a>
+                <?php else: ?>
+                    <a href="ListarJogadores.php" class="block text-gray-700 hover:text-blue-600">🎮 Meus jogos</a>
+                <?php endif; ?>
+            </nav>
+        </aside>
+
+        <main class="flex-1 p-4 space-y-4">
+            <h1 class="text-2xl font-bold">Menu Principal de <?php echo $userType; ?></h1>
         <h2 class="text-xl">Opções Disponíveis:</h2>
         <?php
         echo '<ul class="grid grid-cols-3 gap-4">';

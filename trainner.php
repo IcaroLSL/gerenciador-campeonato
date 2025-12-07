@@ -80,10 +80,22 @@
     
     <!-- Conteúdo principal -->
     <div class="p-4">
-        <h1 class="text-2xl font-bold mb-6"><i class="fas fa-clipboard-list"></i> Gerenciar Time</h1>
-        
-        <!-- Layout de duas colunas -->
-        <div class="grid grid-cols-2 gap-6">
+        <div class="flex gap-6">
+            <!-- Sidebar -->
+            <aside class="w-64 bg-white border p-4 rounded">
+                <h3 class="font-semibold mb-3">Menu</h3>
+                <nav class="space-y-2 text-sm">
+                    <a href="MenuPrincipal.php" class="block text-gray-700 hover:text-blue-600">🏠 Início</a>
+                    <a href="trainner.php" class="block text-gray-700 hover:text-blue-600">➕ Contratar jogador</a>
+                    <a href="ListarJogadores.php" class="block text-gray-700 hover:text-blue-600">📋 Meus jogadores</a>
+                </nav>
+            </aside>
+
+            <div class="flex-1">
+                <h1 class="text-2xl font-bold mb-6"><i class="fas fa-clipboard-list"></i> Gerenciar Time</h1>
+
+                <!-- Layout de duas colunas -->
+                <div class="grid grid-cols-2 gap-6">
             <!-- Coluna esquerda: Contratar jogadores -->
             <div class="p-6 bg-white border border-gray-300 rounded shadow">
                 <h2 class="text-xl font-bold mb-4"><i class="fas fa-user-plus"></i> Contratar Jogador</h2>
@@ -191,6 +203,8 @@
             </div>
         </div>
     </div>
+            </div>
+        </div>
     
     <?php
         if (isset($_POST['contratar']) && $_SERVER["REQUEST_METHOD"] == "POST") {

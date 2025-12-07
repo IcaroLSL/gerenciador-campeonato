@@ -50,16 +50,45 @@
         </div>
     </nav>
     
-    <div class="max-w-2xl mx-auto px-4">
-        <!-- Card principal -->
-        <div class="bg-white rounded-lg shadow-lg p-8">
-            <!-- Cabeçalho -->
-            <div class="mb-8">
-                <h1 class="text-3xl font-bold text-gray-800 flex items-center gap-2">
-                    <i class="fas fa-user-plus text-blue-500"></i> Registro de Campeonatos
-                </h1>
-                <p class="text-gray-600 mt-2">Preencha os dados para criar um novo Campeonato no sistema</p>
-            </div>
+    <div class="flex gap-6 p-4">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white border rounded shadow p-4">
+            <h3 class="font-semibold mb-3 text-gray-800">
+                <i class="fas fa-bars"></i> Menu Administrador
+            </h3>
+            <nav class="space-y-2 text-sm">
+                <a href="MenuPrincipal.php" class="block text-gray-700 hover:text-blue-600 hover:bg-gray-50 p-2 rounded transition">
+                    <i class="fas fa-home"></i> Início
+                </a>
+                <a href="register.php" class="block text-gray-700 hover:text-blue-600 hover:bg-gray-50 p-2 rounded transition">
+                    <i class="fas fa-user-plus"></i> Cadastrar Usuário
+                </a>
+                <a href="registerTeam.php" class="block text-gray-700 hover:text-blue-600 hover:bg-gray-50 p-2 rounded transition">
+                    <i class="fas fa-users"></i> Cadastrar Time
+                </a>
+                <a href="registerChampionship.php" class="block text-gray-700 hover:text-blue-600 hover:bg-gray-50 p-2 rounded transition">
+                    <i class="fas fa-trophy"></i> Cadastrar Campeonato
+                </a>
+                <a href="associateTrainerTeam.php" class="block text-gray-700 hover:text-blue-600 hover:bg-gray-50 p-2 rounded transition">
+                    <i class="fas fa-link"></i> Associar Treinador-Time
+                </a>
+                <a href="associateTeamChampionship.php" class="block text-gray-700 hover:text-blue-600 hover:bg-gray-50 p-2 rounded transition">
+                    <i class="fas fa-link"></i> Associar Time-Campeonato
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Conteúdo principal -->
+        <div class="flex-1">
+            <!-- Card principal -->
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <!-- Cabeçalho -->
+                <div class="mb-8">
+                    <h1 class="text-3xl font-bold text-gray-800 flex items-center gap-2">
+                        <i class="fas fa-user-plus text-blue-500"></i> Registro de Campeonatos
+                    </h1>
+                    <p class="text-gray-600 mt-2">Preencha os dados para criar um novo Campeonato no sistema</p>
+                </div>
             
             <form action="" method="post" class="space-y-6">
                 <!-- Nome -->
@@ -158,6 +187,7 @@
                 }
             }
         ?>
+            </div>
             </div>
         </div>
         
