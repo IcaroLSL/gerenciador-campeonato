@@ -7,6 +7,11 @@
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
+-- Remover e recriar o banco para evitar erros de tabelas já existentes
+DROP DATABASE IF EXISTS `db_campeonato`;
+CREATE DATABASE `db_campeonato` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `db_campeonato`;
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -150,7 +155,39 @@ CREATE TABLE tbl_usuarios (
 );
 
 
-INSERT INTO tbl_usuarios (username, password, cargo, name) VALUES ("admin", "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918", 2, "Henri");
+-- Inserir os 3 usuários existentes
+INSERT INTO tbl_usuarios (id_usuario, username, password, cargo, name) VALUES 
+(1, 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 2, 'Henri'),
+(2, 'trainner', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 1, 'Aguiar'),
+(3, 'player', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 0, 'Kemi');
+
+-- Tabela de times
+CREATE TABLE tbl_times (
+  id_time INT AUTO_INCREMENT PRIMARY KEY,
+  id_campeonato INT DEFAULT NULL,
+  nome VARCHAR(120) NOT NULL,
+  cidade VARCHAR(100) DEFAULT NULL,
+  INDEX (id_campeonato)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Mapeamento usuários → times (unificado: jogadores e treinadores)
+-- A coluna 'cargo' em tbl_usuarios define o tipo (0=jogador, 1=treinador, 2=admin)
+CREATE TABLE tbl_usuarios_time (
+  id_usuario INT NOT NULL,
+  id_time INT NOT NULL,
+  PRIMARY KEY (id_usuario, id_time),
+  INDEX (id_time),
+  FOREIGN KEY (id_usuario) REFERENCES tbl_usuarios(id_usuario) ON DELETE CASCADE,
+  FOREIGN KEY (id_time) REFERENCES tbl_times(id_time) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Dados de exemplo para teste
+-- Criar um time de exemplo
+INSERT INTO tbl_times (id_time, nome, cidade) VALUES (1, 'killers', 'Coroa de espinhos');
+
+-- Associar o treinador Aguiar (id 2, cargo 1) ao time 1
+-- O jogador Kemi (id 3) ficará disponível para ser contratado
+INSERT INTO tbl_usuarios_time (id_usuario, id_time) VALUES (2, 1);
 
 COMMIT;
 

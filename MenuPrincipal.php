@@ -76,7 +76,7 @@ switch ($cookieData['cargo']) {
             case 'Treinador':
                 echo '
                 <li class="p-4 border border-gray-300 rounded hover:bg-gray-100 text-center hover:cursor-pointer"><a href="CadastroJogador.php"><i class="fas fa-trophy"></i> Ver campeonatos</a></li>
-                <li class="p-4 border border-gray-300 rounded hover:bg-gray-100 text-center hover:cursor-pointer"><a href="CadastroTime.php"><i class="fas fa-user-plus"></i> Contratar Jogador</a></li>';
+                <li class="p-4 border border-gray-300 rounded hover:bg-gray-100 text-center hover:cursor-pointer"><a href="trainner.php"><i class="fas fa-user-plus"></i> Contratar Jogador</a></li>';
                 break;
             case 'Jogador':
                 echo '<li class="p-4 border border-gray-300 rounded hover:bg-gray-100 text-center hover:cursor-pointer"><a href="ListarJogadores.php"><i class="fas fa-gamepad"></i> Ver meus jogos</a></li>';

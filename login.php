@@ -45,18 +45,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login - Gerenciador de Campeonato</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
-<body>
-    <form action="" method="post">
-        <label for="username">Usuário:</label>
-        <input type="text" id="username" name="username" required>
-        <br>
-        <label for="password">Senha:</label>
-        <input type="password" id="password" name="password" required>
-        <br>
-        <button type="submit" name="logar">Entrar</button>
-    </form>
-    <?php echo $mensagem; ?>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="w-full max-w-md">
+        <!-- Card principal -->
+        <div class="bg-white rounded-lg shadow-lg p-8">
+            <!-- Cabeçalho -->
+            <div class="text-center mb-8">
+                <i class="fas fa-trophy text-blue-500 text-5xl mb-4"></i>
+                <h1 class="text-3xl font-bold text-gray-800">Gerenciador de Campeonato</h1>
+                <p class="text-gray-600 mt-2">Faça login para continuar</p>
+            </div>
+            
+            <!-- Mensagem de erro/sucesso -->
+            <?php if (!empty($mensagem)): ?>
+                <div class="mb-4 p-4 bg-red-100 border border-red-300 text-red-700 rounded">
+                    <i class="fas fa-exclamation-circle"></i> <?php echo $mensagem; ?>
+                </div>
+            <?php endif; ?>
+            
+            <!-- Formulário -->
+            <form action="" method="post" class="space-y-6">
+                <div>
+                    <label for="username" class="block text-sm font-medium text-gray-700 mb-2">
+                        <i class="fas fa-user"></i> Usuário
+                    </label>
+                    <input 
+                        type="text" 
+                        id="username" 
+                        name="username" 
+                        required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        placeholder="Digite seu usuário"
+                    >
+                </div>
+                
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
+                        <i class="fas fa-lock"></i> Senha
+                    </label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        required
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        placeholder="Digite sua senha"
+                    >
+                </div>
+                
+                <button 
+                    type="submit" 
+                    name="logar"
+                    class="w-full bg-blue-500 text-white py-3 px-4 rounded-lg font-semibold hover:bg-blue-600 transition duration-200 flex items-center justify-center gap-2"
+                >
+                    <i class="fas fa-sign-in-alt"></i> Entrar
+                </button>
+            </form>
+            
+            <!-- Link para registro (se houver página de registro pública) -->
+            <div class="mt-6 text-center text-sm text-gray-600">
+                <p>Não possui uma conta? Entre em contato com o administrador.</p>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="text-center mt-4 text-sm text-gray-600">
+            <p>&copy; 2025 Gerenciador de Campeonato. Todos os direitos reservados.</p>
+        </div>
+    </div>
 </body>
 </html>
