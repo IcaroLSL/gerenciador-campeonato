@@ -197,9 +197,15 @@ INSERT INTO tbl_times (id_time, nome, cidade) VALUES (1, 'killers', 'Coroa de es
 INSERT INTO tbl_times (id_time, nome, cidade) VALUES (2, 'psikolera', 'Coroa de espinhos');
 
 -- Associar o treinador Aguiar (id 2, cargo 1) ao time 1
--- O jogador Kemi (id 3) ficará disponível para ser contratado
 INSERT INTO tbl_usuarios_time (id_usuario, id_time) VALUES (6, 1);
 INSERT INTO tbl_usuarios_time (id_usuario, id_time) VALUES (7, 2);
+
+-- Criar um campeonato de exemplo
+INSERT INTO db_campeonato.tbl_campeonatos (id_campeonato,titulo,data_inicio,intervalo_minutos,pontos_vitoria,pontos_empate) VALUES (1,'Hexatombe','2025-10-25 18:00:00',5,0,0);
+
+-- Associar os times ao campeonato
+INSERT INTO tbl_equipes (id_equipe, id_campeonato, nome, cidade) VALUES (1, 1, 'killers', 'Coroa de espinhos');
+INSERT INTO tbl_equipes (id_equipe, id_campeonato, nome, cidade) VALUES (2, 1, 'psikolera', 'Coroa de espinhos');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
