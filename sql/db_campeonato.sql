@@ -158,9 +158,18 @@ CREATE TABLE tbl_usuarios (
 
 -- Inserir os 3 usuários existentes
 INSERT INTO tbl_usuarios (id_usuario, username, password, cargo, name) VALUES 
-(1, 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 2, 'Henri'),
-(2, 'trainner', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 1, 'Aguiar'),
-(3, 'player', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 0, 'Kemi');
+(1, 'diabo', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 2, 'Henri'),
+(2, 'mutilador Noturno', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 0, 'Aguiar'),
+(3, 'colosso', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 0, 'Dalmo');
+(4, 'x', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 0, 'Jae-Yoon');
+(5, '', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 0, 'Kemi');
+(6, '???', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 1, 'Labirinto');
+(7, 'trainner', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 2, 'Cindy Lopes');
+(8, 'player', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 1, 'Caio Teles');
+(9, 'player1', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 1, 'Eloy');
+(10, 'player2', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 1, 'Franco');
+(11, 'player3', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 1, 'Alê');
+(12, 'sacrificio', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 1, 'Caíto Rocha');
 
 -- Tabela de times
 CREATE TABLE tbl_times (
@@ -185,11 +194,12 @@ CREATE TABLE tbl_usuarios_time (
 -- Dados de exemplo para teste
 -- Criar um time de exemplo
 INSERT INTO tbl_times (id_time, nome, cidade) VALUES (1, 'killers', 'Coroa de espinhos');
+INSERT INTO tbl_times (id_time, nome, cidade) VALUES (2, 'psikolera', 'Coroa de espinhos');
 
 -- Associar o treinador Aguiar (id 2, cargo 1) ao time 1
 -- O jogador Kemi (id 3) ficará disponível para ser contratado
-INSERT INTO tbl_usuarios_time (id_usuario, id_time) VALUES (2, 1);
-
+INSERT INTO tbl_usuarios_time (id_usuario, id_time) VALUES (6, 1);
+INSERT INTO tbl_usuarios_time (id_usuario, id_time) VALUES (7, 2);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
