@@ -37,6 +37,7 @@ CREATE TABLE `tbl_campeonatos` (
   `titulo` varchar(100) NOT NULL,
   `data_inicio` datetime NOT NULL,
   `intervalo_minutos` int(11) NOT NULL DEFAULT 1440,
+  `iniciado` tinyint(4) NOT NULL DEFAULT 0,
   `pontos_vitoria` int(11) DEFAULT 3,
   `pontos_empate` int(11) DEFAULT 1,
   `pontos_derrota` int(11) DEFAULT 0,

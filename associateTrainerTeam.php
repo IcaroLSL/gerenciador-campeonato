@@ -52,29 +52,15 @@
     
     <div class="flex gap-6 p-4">
         <!-- Sidebar -->
-        <aside class="w-64 bg-white border rounded shadow p-4">
-            <h3 class="font-semibold mb-3 text-gray-800">
-                <i class="fas fa-bars"></i> Menu Administrador
-            </h3>
-            <nav class="space-y-2 text-sm">
-                <a href="MenuPrincipal.php" class="block text-gray-700 hover:text-blue-600 hover:bg-gray-50 p-2 rounded transition">
-                    <i class="fas fa-home"></i> Início
-                </a>
-                <a href="register.php" class="block text-gray-700 hover:text-blue-600 hover:bg-gray-50 p-2 rounded transition">
-                    <i class="fas fa-user-plus"></i> Cadastrar Usuário
-                </a>
-                <a href="registerTeam.php" class="block text-gray-700 hover:text-blue-600 hover:bg-gray-50 p-2 rounded transition">
-                    <i class="fas fa-users"></i> Cadastrar Time
-                </a>
-                <a href="registerChampionship.php" class="block text-gray-700 hover:text-blue-600 hover:bg-gray-50 p-2 rounded transition">
-                    <i class="fas fa-trophy"></i> Cadastrar Campeonato
-                </a>
-                <a href="associateTrainerTeam.php" class="block text-gray-700 hover:text-blue-600 hover:bg-gray-50 p-2 rounded transition">
-                    <i class="fas fa-link"></i> Associar Treinador-Time
-                </a>
-                <a href="associateTeamChampionship.php" class="block text-gray-700 hover:text-blue-600 hover:bg-gray-50 p-2 rounded transition">
-                    <i class="fas fa-link"></i> Associar Time-Campeonato
-                </a>
+        <aside class="w-64 bg-white border-r p-4">
+            <h3 class="text-lg font-semibold mb-4">Navegação</h3>
+            <nav class="space-y-2">
+                <a href="registerChampionship.php" class="block text-gray-700 hover:text-blue-600">📌 Cadastrar campeonato</a>
+                <a href="register.php" class="block text-gray-700 hover:text-blue-600">👥 Cadastrar usuários</a>
+                <a href="registerTeam.php" class="block text-gray-700 hover:text-blue-600">🏷️ Cadastrar time</a>
+                <a href="associateTeamChampionship.php" class="block text-gray-700 hover:text-blue-600">🔗 Associar time/campeonato</a>
+                <a href="associateTrainerTeam.php" class="block text-gray-700 hover:text-blue-600">🧑‍🏫 Associar treinador/time</a>
+                <a href="manageChampionships.php" class="block text-gray-700 hover:text-blue-600">🏆 Ver campeonatos</a>
             </nav>
         </aside>
 
