@@ -16,7 +16,7 @@ if (isset($_COOKIE['credentials']) && $_COOKIE['credentials'] != false) {
 
 switch ($cookieData['cargo']) {
     case 0:
-        $userType = "Jogador";
+        $userType = "Usuário";
         break;
     case 1:
         $userType = "Treinador";
@@ -44,7 +44,9 @@ switch ($cookieData['cargo']) {
 <body>
     <nav class="flex flex-row justify-between items-center p-4 bg-gray-200">
         <div>
-            Fatec Campeonatos
+            <a href="MenuPrincipal.php" class="text-xl font-bold text-gray-800 hover:text-blue-500 transition">
+                <i class="fas fa-trophy"></i> Fatec Campeonatos
+            </a>
         </div>
 
         <div class="flex flex-row items-center space-x-4">
@@ -89,20 +91,21 @@ switch ($cookieData['cargo']) {
             switch ($userType) {
                 case 'Administrador':
                     echo '
-                    <a href="manageChampionships.php"><li class="p-4 border border-gray-300 rounded hover:bg-gray-100 text-center hover:cursor-pointer"><i class="fas fa-eye"></i> Ver jogos de campeonato</li></a>
-                    <a href="registerChampionship.php"><li class="p-4 border border-gray-300 rounded hover:bg-gray-100 text-center hover:cursor-pointer"><i class="fas fa-plus-circle"></i> Cadastrar campeonato</li></a>
-                    <a href="register.php"><li class="p-4 border border-gray-300 rounded hover:bg-gray-100 text-center hover:cursor-pointer"><i class="fas fa-user"></i> Cadastrar Usuarios</li></a>
-                    <a href="registerTeam.php"><li class="p-4 border border-gray-300 rounded hover:bg-gray-100 text-center hover:cursor-pointer"><i class="fas fa-user"></i> Cadastrar Time</li></a>
-                    <a href="associateTeamChampionship.php"><li class="p-4 border border-gray-300 rounded hover:bg-gray-100 text-center hover:cursor-pointer"><i class="fas fa-user"></i> Associar Time Campeonato</li></a>
-                    <a href="associateTrainerTeam.php"><li class="p-4 border border-gray-300 rounded hover:bg-gray-100 text-center hover:cursor-pointer"><i class="fas fa-trophy"></i> Associar Treinador Time</li></a>';
+                
+                <a href="manageChampionships.php"><li class="p-4 border border-gray-300 rounded hover:bg-gray-100 text-center hover:cursor-pointer"><i class="fas fa-eye"></i> Ver jogos de campeonato</li></a>
+                <a href="registerChampionship.php"><li class="p-4 border border-gray-300 rounded hover:bg-gray-100 text-center hover:cursor-pointer"><i class="fas fa-plus-circle"></i> Cadastrar campeonato</li></a>
+                <a href="register.php"><li class="p-4 border border-gray-300 rounded hover:bg-gray-100 text-center hover:cursor-pointer"><i class="fas fa-user"></i> Cadastrar Usuarios</li></a>
+                <a href="registerTeam.php"><li class="p-4 border border-gray-300 rounded hover:bg-gray-100 text-center hover:cursor-pointer"><i class="fas fa-user"></i> Cadastrar Time</li></a>
+                <a href="associateTeamChampionship.php"><li class="p-4 border border-gray-300 rounded hover:bg-gray-100 text-center hover:cursor-pointer"><i class="fas fa-user"></i> Associar Time Campeonato</li></a>
+                <a href="associateTrainerTeam.php"><li class="p-4 border border-gray-300 rounded hover:bg-gray-100 text-center hover:cursor-pointer"><i class="fas fa-trophy"></i> Associar Treinador Time</li></a>';
                     break;
                 case 'Treinador':
                     echo '
-                        <a href="manageChampionships.php"><li class="p-4 border border-gray-300 rounded hover:bg-gray-100 text-center hover:cursor-pointer"><i class="fas fa-trophy"></i> Ver campeonatos</li></a>
+                        <a href="CadastroJogador.php"><li class="p-4 border border-gray-300 rounded hover:bg-gray-100 text-center hover:cursor-pointer"><i class="fas fa-trophy"></i> Ver campeonatos</li></a>
                         <a href="trainner.php"><li class="p-4 border border-gray-300 rounded hover:bg-gray-100 text-center hover:cursor-pointer"><i class="fas fa-user-plus"></i> Contratar Jogador</li></a>';
                     break;
                 case 'Jogador':
-                    echo '<a href="manageChampionships.php"><li class="p-4 border border-gray-300 rounded hover:bg-gray-100 text-center hover:cursor-pointer"><i class="fas fa-gamepad"></i> Ver meus jogos</li></a>';
+                    echo '<a href="ListarJogadores.php"><li class="p-4 border border-gray-300 rounded hover:bg-gray-100 text-center hover:cursor-pointer"><i class="fas fa-gamepad"></i> Ver meus jogos</li></a>';
                     break;
             }
 
