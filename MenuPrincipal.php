@@ -16,7 +16,7 @@ if (isset($_COOKIE['credentials']) && $_COOKIE['credentials'] != false) {
 
 switch ($cookieData['cargo']) {
     case 0:
-        $userType = "Usuário";
+        $userType = "Jogador";
         break;
     case 1:
         $userType = "Treinador";
@@ -89,21 +89,20 @@ switch ($cookieData['cargo']) {
             switch ($userType) {
                 case 'Administrador':
                     echo '
-                
-                <a href="manageChampionships.php"><li class="p-4 border border-gray-300 rounded hover:bg-gray-100 text-center hover:cursor-pointer"><i class="fas fa-eye"></i> Ver jogos de campeonato</li></a>
-                <a href="registerChampionship.php"><li class="p-4 border border-gray-300 rounded hover:bg-gray-100 text-center hover:cursor-pointer"><i class="fas fa-plus-circle"></i> Cadastrar campeonato</li></a>
-                <a href="register.php"><li class="p-4 border border-gray-300 rounded hover:bg-gray-100 text-center hover:cursor-pointer"><i class="fas fa-user"></i> Cadastrar Usuarios</li></a>
-                <a href="registerTeam.php"><li class="p-4 border border-gray-300 rounded hover:bg-gray-100 text-center hover:cursor-pointer"><i class="fas fa-user"></i> Cadastrar Time</li></a>
-                <a href="associateTeamChampionship.php"><li class="p-4 border border-gray-300 rounded hover:bg-gray-100 text-center hover:cursor-pointer"><i class="fas fa-user"></i> Associar Time Campeonato</li></a>
-                <a href="associateTrainerTeam.php"><li class="p-4 border border-gray-300 rounded hover:bg-gray-100 text-center hover:cursor-pointer"><i class="fas fa-trophy"></i> Associar Treinador Time</li></a>';
+                    <a href="manageChampionships.php"><li class="p-4 border border-gray-300 rounded hover:bg-gray-100 text-center hover:cursor-pointer"><i class="fas fa-eye"></i> Ver jogos de campeonato</li></a>
+                    <a href="registerChampionship.php"><li class="p-4 border border-gray-300 rounded hover:bg-gray-100 text-center hover:cursor-pointer"><i class="fas fa-plus-circle"></i> Cadastrar campeonato</li></a>
+                    <a href="register.php"><li class="p-4 border border-gray-300 rounded hover:bg-gray-100 text-center hover:cursor-pointer"><i class="fas fa-user"></i> Cadastrar Usuarios</li></a>
+                    <a href="registerTeam.php"><li class="p-4 border border-gray-300 rounded hover:bg-gray-100 text-center hover:cursor-pointer"><i class="fas fa-user"></i> Cadastrar Time</li></a>
+                    <a href="associateTeamChampionship.php"><li class="p-4 border border-gray-300 rounded hover:bg-gray-100 text-center hover:cursor-pointer"><i class="fas fa-user"></i> Associar Time Campeonato</li></a>
+                    <a href="associateTrainerTeam.php"><li class="p-4 border border-gray-300 rounded hover:bg-gray-100 text-center hover:cursor-pointer"><i class="fas fa-trophy"></i> Associar Treinador Time</li></a>';
                     break;
                 case 'Treinador':
                     echo '
-                        <a href="CadastroJogador.php"><li class="p-4 border border-gray-300 rounded hover:bg-gray-100 text-center hover:cursor-pointer"><i class="fas fa-trophy"></i> Ver campeonatos</li></a>
+                        <a href="manageChampionships.php"><li class="p-4 border border-gray-300 rounded hover:bg-gray-100 text-center hover:cursor-pointer"><i class="fas fa-trophy"></i> Ver campeonatos</li></a>
                         <a href="trainner.php"><li class="p-4 border border-gray-300 rounded hover:bg-gray-100 text-center hover:cursor-pointer"><i class="fas fa-user-plus"></i> Contratar Jogador</li></a>';
                     break;
                 case 'Jogador':
-                    echo '<a href="ListarJogadores.php"><li class="p-4 border border-gray-300 rounded hover:bg-gray-100 text-center hover:cursor-pointer"><i class="fas fa-gamepad"></i> Ver meus jogos</li></a>';
+                    echo '<a href="manageChampionships.php"><li class="p-4 border border-gray-300 rounded hover:bg-gray-100 text-center hover:cursor-pointer"><i class="fas fa-gamepad"></i> Ver meus jogos</li></a>';
                     break;
             }
 
